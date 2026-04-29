@@ -26,5 +26,21 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui'
+  },
+
+  app: {
+    head: {
+      // The default title if a page doesn't specify one
+      title: 'Batik Showcase', 
+      
+      // %s will be replaced by the individual page's title
+      titleTemplate: '%s | UT Capstone Project',
+      
+      // You can also add default meta tags, favicons, etc. here
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      ]
+    }
   }
 })
