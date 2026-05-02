@@ -90,7 +90,7 @@
             </p>
             <div class="pt-4">
               <Button
-                variant="landing-primary"
+                variant="primary"
                 size="lg"
                 rounded="none"
                 class="group/btn px-10"
