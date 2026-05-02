@@ -36,15 +36,14 @@
           >
         </div>
 
-        <!-- Social/Contact Placeholder -->
-        <div class="flex items-center gap-4">
-          <div
-            v-for="i in 3"
-            :key="i"
-            class="size-10 border border-stone-800 flex items-center justify-center hover:border-amber-600 hover:text-amber-600 transition-all cursor-pointer"
+        <!-- Admin Access Link (Replaces Social Placeholders) -->
+        <div class="flex items-center">
+          <NuxtLink
+            to="/login"
+            class="text-xs font-sans font-bold uppercase tracking-[0.2em] px-6 py-3 border border-stone-800 hover:border-amber-600 hover:text-amber-500 transition-all"
           >
-            <span class="text-[10px]">●</span>
-          </div>
+            Akses Administrator
+          </NuxtLink>
         </div>
       </div>
 

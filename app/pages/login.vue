@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Mail, Lock, ArrowLeft } from "lucide-vue-next";
+import { Mail, Lock, ArrowLeft, ArrowRight } from "lucide-vue-next";
 import { ref } from "vue";
+import { Button } from "@/components/ui/button";
 
 const router = useRouter();
 
@@ -14,130 +15,150 @@ const handleLogin = () => {
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-stone-50 text-stone-900 flex flex-col items-center justify-center p-6 relative overflow-hidden"
-  >
-    <!-- Ambient background glows (Warm Batik tones) -->
-    <div
-      class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500/15 blur-[120px] rounded-full"
-    ></div>
-    <div
-      class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-rose-700/10 blur-[120px] rounded-full"
-    ></div>
-
-    <NuxtLink
-      to="/"
-      class="absolute top-8 left-8 flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors group"
-    >
-      <ArrowLeft
-        class="w-4 h-4 group-hover:-translate-x-1 transition-transform"
-      />
-      Back to Home
-    </NuxtLink>
-
-    <div class="w-full max-w-md z-10">
-      <div class="text-center mb-8 space-y-2">
-        <h1
-          class="text-4xl font-bold tracking-tight bg-linear-to-br from-stone-900 to-amber-800 bg-clip-text text-transparent"
-        >
-          Admin Portal
-        </h1>
-        <p class="text-stone-600">Secure access to Batik Showcase management</p>
+  <div class="min-h-screen bg-white flex overflow-hidden">
+    <!-- Left Side: Visual/Decorative -->
+    <div class="hidden lg:flex lg:w-1/2 relative bg-stone-900 overflow-hidden">
+      <div class="absolute inset-0 opacity-40">
+        <img
+          src="/images/login.webp"
+          alt="Batik Background"
+          class="w-full h-full object-cover object-left grayscale transition-transform duration-[10s] hover:scale-110"
+        />
       </div>
+      <!-- Pattern Overlay -->
+      <!-- <div class="absolute inset-0 opacity-10">
+        <img
+          src="/images/parang-pattern.webp"
+          alt="Pattern Overlay"
+          class="w-full h-full object-cover invert"
+        />
+      </div> -->
+      <!-- Gradient Overlay -->
+      <div
+        class="absolute inset-0 bg-linear-to-t from-stone-900 via-transparent to-transparent"
+      ></div>
 
       <div
-        class="bg-white/80 backdrop-blur-xl border border-stone-200 p-8 rounded-2xl shadow-xl shadow-stone-200/50 space-y-6"
+        class="relative z-10 w-full h-full flex flex-col justify-between p-16"
       >
-        <form class="space-y-4" @submit.prevent="handleLogin">
-          <div class="space-y-2">
-            <label for="email" class="text-sm font-medium text-stone-700 ml-1"
-              >Email Address</label
-            >
-            <div class="relative group">
-              <div
-                class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
-              >
-                <Mail class="w-5 h-5" />
-              </div>
-              <input
-                id="email"
-                v-model="email"
-                type="email"
-                placeholder="admin@batik.com"
-                class="w-full bg-stone-50/50 border border-stone-200 rounded-xl py-3 pl-11 pr-4 outline-none focus:border-amber-600/50 focus:ring-4 focus:ring-amber-600/10 transition-all placeholder:text-stone-400 text-stone-900"
-                required
-              />
-            </div>
-          </div>
+        <NuxtLink
+          to="/"
+          class="inline-flex items-center text-amber-500 text-xs font-sans font-bold uppercase tracking-[0.2em] hover:text-amber-400 transition-colors"
+        >
+          <ArrowLeft class="mr-2 h-4 w-4" />
+          Beranda
+        </NuxtLink>
 
-          <div class="space-y-2">
-            <div class="flex items-center justify-between ml-1">
-              <label for="password" class="text-sm font-medium text-stone-700"
-                >Password</label
-              >
-              <a
-                href="#"
-                class="text-xs text-amber-700 hover:text-amber-600 transition-colors"
-                >Forgot password?</a
-              >
-            </div>
-            <div class="relative group">
-              <div
-                class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
-              >
-                <Lock class="w-5 h-5" />
-              </div>
-              <input
-                id="password"
-                v-model="password"
-                type="password"
-                placeholder="••••••••"
-                class="w-full bg-stone-50/50 border border-stone-200 rounded-xl py-3 pl-11 pr-4 outline-none focus:border-amber-600/50 focus:ring-4 focus:ring-amber-600/10 transition-all placeholder:text-stone-400 text-stone-900"
-                required
-              />
-            </div>
-          </div>
+        <div class="space-y-6">
+          <div class="h-1 w-16 bg-amber-600"></div>
+          <h2
+            class="text-4xl md:text-5xl font-heading text-white leading-tight"
+          >
+            Akses Panel <br />
+            <span class="text-amber-500">Administrator.</span>
+          </h2>
+          <p class="text-stone-400 font-body max-w-md leading-relaxed">
+            Kelola katalog koleksi, pantau statistik, dan kelola kemitraan UMKM
+            dalam satu dashboard terintegrasi.
+          </p>
+        </div>
 
-          <div class="pt-2">
-            <!-- Custom styled button to match the theme instead of default shadcn style -->
-            <button
-              type="submit"
-              class="w-full py-3 rounded-xl text-base font-semibold bg-amber-700 hover:bg-amber-800 text-white border-none shadow-lg shadow-amber-700/20 transition-all active:scale-[0.98]"
-            >
-              Sign In to Dashboard
-            </button>
-          </div>
-        </form>
-
-        <div class="relative py-2">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-stone-200"></div>
-          </div>
-          <div class="relative flex justify-center text-xs uppercase">
-            <span class="bg-white px-2 text-stone-400">Security verified</span>
-          </div>
+        <div
+          class="text-stone-500 text-[10px] font-sans uppercase tracking-[0.2em]"
+        >
+          &copy; 2026 E-Katalog Batik — Capstone Project
         </div>
       </div>
+    </div>
 
-      <p class="text-center mt-8 text-sm text-stone-500">
-        &copy; 2026 UT Capstone Project. All rights reserved.
-      </p>
+    <!-- Right Side: Login Form -->
+    <div
+      class="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-16 bg-stone-50"
+    >
+      <div class="w-full max-w-md space-y-12">
+        <!-- Back Link for Mobile -->
+        <NuxtLink
+          to="/"
+          class="lg:hidden inline-flex items-center text-amber-700 text-xs font-sans font-bold uppercase tracking-[0.2em] mb-8"
+        >
+          <ArrowLeft class="mr-2 h-4 w-4" />
+          Beranda
+        </NuxtLink>
+
+        <div class="space-y-2">
+          <h3 class="text-3xl font-heading text-stone-900">Selamat Datang</h3>
+          <p class="text-stone-500 font-body">
+            Silakan masuk menggunakan akun administrator Anda.
+          </p>
+        </div>
+
+        <form class="space-y-6" @submit.prevent="handleLogin">
+          <div class="space-y-4">
+            <!-- Email Input -->
+            <div class="space-y-2">
+              <label
+                for="email"
+                class="text-[10px] font-sans font-bold text-stone-400 uppercase tracking-widest ml-1"
+                >Alamat Email</label
+              >
+              <div class="relative group">
+                <div
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
+                >
+                  <Mail class="w-4 h-4" />
+                </div>
+                <input
+                  id="email"
+                  v-model="email"
+                  type="email"
+                  placeholder="admin@batik.com"
+                  class="w-full bg-white border border-stone-200 rounded-none py-4 pl-12 pr-4 outline-none focus:border-amber-600 focus:ring-0 transition-all font-body text-stone-900 placeholder:text-stone-300"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="space-y-2">
+              <label
+                for="password"
+                class="text-[10px] font-sans font-bold text-stone-400 uppercase tracking-widest"
+                >Kata sandi</label
+              >
+              <div class="relative group">
+                <div
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
+                >
+                  <Lock class="w-4 h-4" />
+                </div>
+                <input
+                  id="password"
+                  v-model="password"
+                  type="password"
+                  placeholder="••••••••"
+                  class="w-full bg-white border border-stone-200 rounded-none py-4 pl-12 pr-4 outline-none focus:border-amber-600 focus:ring-0 transition-all font-body text-stone-900 placeholder:text-stone-300"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              rounded="none"
+              class="w-full h-14 group"
+            >
+              Masuk ke Dashboard
+              <ArrowRight
+                class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+              />
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
-</style>
