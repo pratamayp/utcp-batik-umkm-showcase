@@ -1,17 +1,50 @@
 <script setup lang="ts">
 import { Mail, Lock, ArrowLeft, ArrowRight } from "lucide-vue-next";
-import { ref } from "vue";
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { InputGroup } from "@/components/ui/input-group";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const router = useRouter();
 
-const email = ref("");
-const password = ref("");
+const isVisible = ref(false);
 
-const handleLogin = () => {
-  console.log("Logging in with:", email.value, password.value);
-  router.push("/overview");
-};
+// Define validation schema
+const schema = toTypedSchema(
+  z.object({
+    email: z
+      .string()
+      .min(1, "Email wajib diisi")
+      .email("Format email tidak valid"),
+    password: z.string().min(6, "Kata sandi minimal 6 karakter"),
+  }),
+);
+
+// Initialize form
+const form = useForm({
+  validationSchema: schema,
+  initialValues: {
+    email: "",
+    password: "",
+  },
+});
+
+const { handleSubmit, errors, defineField, isSubmitting } = form;
+
+// Define fields with v-model compatibility
+const [email, emailProps] = defineField("email");
+const [password, passwordProps] = defineField("password");
+
+const onSubmit = handleSubmit((values) => {
+  console.log("Form Submitted:", values);
+  // Simulate login delay
+  setTimeout(() => {
+    router.push("/overview");
+  }, 1000);
+});
 </script>
 
 <template>
@@ -25,15 +58,6 @@ const handleLogin = () => {
           class="w-full h-full object-cover object-left grayscale transition-transform duration-[10s] hover:scale-110"
         />
       </div>
-      <!-- Pattern Overlay -->
-      <!-- <div class="absolute inset-0 opacity-10">
-        <img
-          src="/images/parang-pattern.webp"
-          alt="Pattern Overlay"
-          class="w-full h-full object-cover invert"
-        />
-      </div> -->
-      <!-- Gradient Overlay -->
       <div
         class="absolute inset-0 bg-linear-to-t from-stone-900 via-transparent to-transparent"
       ></div>
@@ -76,7 +100,6 @@ const handleLogin = () => {
       class="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-16 bg-stone-50"
     >
       <div class="w-full max-w-md space-y-12">
-        <!-- Back Link for Mobile -->
         <NuxtLink
           to="/"
           class="lg:hidden inline-flex items-center text-amber-700 text-xs font-sans font-bold uppercase tracking-[0.2em] mb-8"
@@ -92,8 +115,8 @@ const handleLogin = () => {
           </p>
         </div>
 
-        <form class="space-y-6" @submit.prevent="handleLogin">
-          <div class="space-y-4">
+        <form class="space-y-6" @submit="onSubmit">
+          <div class="space-y-5">
             <!-- Email Input -->
             <div class="space-y-2">
               <label
@@ -101,44 +124,79 @@ const handleLogin = () => {
                 class="text-[10px] font-sans font-bold text-stone-400 uppercase tracking-widest ml-1"
                 >Alamat Email</label
               >
-              <div class="relative group">
-                <div
-                  class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
-                >
+              <InputGroup
+                class="h-14"
+                :class="{
+                  'border-destructive ring-destructive/20 ring-[3px]':
+                    errors?.email,
+                }"
+              >
+                <div data-align="inline-start" class="pl-4 pr-2 text-stone-400">
                   <Mail class="w-4 h-4" />
                 </div>
-                <input
+                <Input
                   id="email"
                   v-model="email"
-                  type="email"
+                  v-bind="emailProps"
                   placeholder="admin@batik.com"
-                  class="w-full bg-white border border-stone-200 rounded-none py-4 pl-12 pr-4 outline-none focus:border-amber-600 focus:ring-0 transition-all font-body text-stone-900 placeholder:text-stone-300"
-                  required
+                  class="border-none shadow-none focus-visible:ring-0 h-full"
                 />
-              </div>
+              </InputGroup>
+              <p
+                v-if="errors?.email"
+                class="text-[10px] text-destructive font-bold uppercase tracking-wider ml-1 mt-1"
+              >
+                {{ errors.email }}
+              </p>
             </div>
 
             <!-- Password Input -->
-            <div class="space-y-2">
-              <label
-                for="password"
-                class="text-[10px] font-sans font-bold text-stone-400 uppercase tracking-widest"
-                >Kata sandi</label
-              >
-              <div class="relative group">
-                <div
-                  class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-amber-700 transition-colors"
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label
+                  for="password"
+                  class="text-[10px] font-sans font-bold text-stone-400 uppercase tracking-widest ml-1"
+                  >Kata sandi</label
                 >
-                  <Lock class="w-4 h-4" />
-                </div>
-                <input
-                  id="password"
-                  v-model="password"
-                  type="password"
-                  placeholder="••••••••"
-                  class="w-full bg-white border border-stone-200 rounded-none py-4 pl-12 pr-4 outline-none focus:border-amber-600 focus:ring-0 transition-all font-body text-stone-900 placeholder:text-stone-300"
-                  required
-                />
+                <InputGroup
+                  class="h-14"
+                  :class="{
+                    'border-destructive ring-destructive/20 ring-[3px]':
+                      errors?.password,
+                  }"
+                >
+                  <div
+                    data-align="inline-start"
+                    class="pl-4 pr-2 text-stone-400"
+                  >
+                    <Lock class="w-4 h-4" />
+                  </div>
+                  <Input
+                    id="password"
+                    v-model="password"
+                    v-bind="passwordProps"
+                    :type="isVisible ? 'text' : 'password'"
+                    placeholder="••••••••"
+                    class="border-none shadow-none focus-visible:ring-0 h-full"
+                  />
+                </InputGroup>
+                <p
+                  v-if="errors?.password"
+                  class="text-[10px] text-destructive font-bold uppercase tracking-wider ml-1 mt-1"
+                >
+                  {{ errors.password }}
+                </p>
+              </div>
+
+              <!-- Show Password Checkbox -->
+              <div class="flex items-center gap-3 px-1">
+                <Checkbox id="show-password" v-model:checked="isVisible" />
+                <label
+                  for="show-password"
+                  class="text-xs font-sans font-bold text-stone-500 uppercase tracking-widest cursor-pointer select-none"
+                >
+                  Tampilkan Kata Sandi
+                </label>
               </div>
             </div>
           </div>
@@ -150,11 +208,15 @@ const handleLogin = () => {
               size="lg"
               rounded="none"
               class="w-full h-14 group"
+              :disabled="isSubmitting"
             >
-              Masuk ke Dashboard
-              <ArrowRight
-                class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
-              />
+              <span v-if="isSubmitting">Sedang Memproses...</span>
+              <span v-else class="flex items-center">
+                Masuk ke Dashboard
+                <ArrowRight
+                  class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                />
+              </span>
             </Button>
           </div>
         </form>
