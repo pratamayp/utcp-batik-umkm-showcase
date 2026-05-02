@@ -68,7 +68,7 @@
           <div>
             <span
               class="block text-[9px] font-sans font-bold text-amber-600 uppercase tracking-widest leading-none mb-1"
-              >Handcrafted By</span
+              >Koleksi Dari</span
             >
             <span
               class="block text-sm font-heading text-stone-900 leading-none"
@@ -85,13 +85,6 @@
               >{{ product.umkmLocation }}</span
             >
           </div>
-          <a
-            :href="`https://wa.me/${product.umkmPhone}`"
-            target="_blank"
-            class="text-[9px] font-sans font-bold text-amber-700 uppercase tracking-widest hover:text-amber-800 transition-colors underline underline-offset-4 decoration-amber-200"
-          >
-            Hubungi UMKM
-          </a>
         </div>
       </div>
 

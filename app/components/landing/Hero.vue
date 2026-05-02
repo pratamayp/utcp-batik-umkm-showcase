@@ -52,7 +52,7 @@
             Jelajahi Koleksi
           </Button>
 
-          <NuxtLink to="#about">
+          <NuxtLink to="/about">
             <Button variant="outline" size="lg" rounded="none">
               Tentang Kami
             </Button>

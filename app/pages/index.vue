@@ -3,6 +3,7 @@
     <LandingHero />
     <LandingIntroduction />
     <LandingCatalogue />
+    <LandingFooter />
   </main>
 </template>
 
