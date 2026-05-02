@@ -3,7 +3,7 @@
     class="min-h-screen bg-stone-50 selection:bg-amber-100 selection:text-amber-900"
   >
     <!-- Header -->
-    <div class="container mx-auto py-10 px-6 md:px-12 lg:px-24 relative z-10">
+    <div class="container mx-auto py-10 px-6 md:px-12 relative z-10">
       <NuxtLink
         to="/"
         class="inline-flex items-center text-amber-600 text-xs font-sans font-bold uppercase tracking-[0.2em] hover:text-amber-700 transition-colors gap-x-3"
@@ -15,7 +15,7 @@
 
     <!-- Capstone Story Section -->
     <section class="">
-      <div class="container mx-auto px-6 md:px-12 lg:px-24">
+      <div class="container mx-auto px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div
             class="relative aspect-square bg-stone-200 overflow-hidden group"
@@ -58,7 +58,7 @@
 
     <!-- Team Section -->
     <section class="py-24 bg-stone-100">
-      <div class="container mx-auto px-6 md:px-12 lg:px-24">
+      <div class="container mx-auto px-6 md:px-12">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-3xl md:text-4xl font-heading text-stone-900 mb-6">
             Tim Pengembang

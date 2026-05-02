@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-stone-900 text-stone-400 py-16 border-t border-stone-800">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
+    <div class="container mx-auto px-6 md:px-12">
       <div class="flex flex-col md:flex-row justify-between items-center gap-8">
         <!-- Brand & Tagline -->
         <div
@@ -42,7 +42,7 @@
             to="/login"
             class="text-xs font-sans font-bold uppercase tracking-[0.2em] px-6 py-3 border border-stone-800 hover:border-amber-600 hover:text-amber-500 transition-all"
           >
-            Akses Administrator
+            Administrator
           </NuxtLink>
         </div>
       </div>

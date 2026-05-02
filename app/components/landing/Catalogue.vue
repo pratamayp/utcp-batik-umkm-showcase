@@ -1,6 +1,6 @@
 <template>
   <section id="catalogue" class="py-24 bg-stone-50 overflow-hidden">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
+    <div class="container mx-auto px-6 md:px-12">
       <!-- Header Section -->
       <div
         class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"

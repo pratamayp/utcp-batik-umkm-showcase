@@ -14,7 +14,7 @@
     </div>
 
     <!-- Content Area -->
-    <div class="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
       <div class="max-w-3xl transform -translate-y-4">
         <!-- Subheading / Tagline -->
         <div class="flex items-center gap-3 mb-6 animate-fade-in-up">

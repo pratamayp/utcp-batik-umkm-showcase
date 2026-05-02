@@ -1,6 +1,6 @@
 <template>
   <section id="about" class="py-24 md:py-32 bg-white overflow-hidden">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
+    <div class="container mx-auto px-6 md:px-12">
       <!-- Top Section: Heading and Lead Description -->
       <div class="flex flex-col lg:flex-row gap-12 mb-20">
         <div class="w-full lg:w-8/12 relative b">
